@@ -1,6 +1,8 @@
-import { NhostClient } from '@nhost/nhost-js';
+import { NhostClient } from '@nhost/react';
 
-export const nhost = new NhostClient({
-  subdomain: 'nqlsviljwkjxtpycwjsl',
-  region: 'ap-south-1',
+const nhost = new NhostClient({
+  subdomain: import.meta.env.VITE_NHOST_SUBDOMAIN,
+  region: import.meta.env.VITE_NHOST_REGION,
 });
+
+export { nhost };
