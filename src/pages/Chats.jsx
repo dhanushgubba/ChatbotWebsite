@@ -83,6 +83,10 @@ const DELETE_CHAT = gql`
 
 const Chats = () => {
   const user = nhost.auth.getUser();
+  const handleLogout = async () => {
+    await nhost.auth.signOut();
+    window.location.href = '/';
+  };
   const [selectedChat, setSelectedChat] = useState(null);
   const [message, setMessage] = useState('');
   const [newChatTitle, setNewChatTitle] = useState('');
@@ -412,12 +416,29 @@ const Chats = () => {
       <div className="chats-sidebar">
         <div className="sidebar-header">
           <h3>Your Chats</h3>
-          <button
-            onClick={() => setShowNewChatForm(!showNewChatForm)}
-            className="new-chat-button"
-          >
-            + New Chat
-          </button>
+          <div style={{ display: 'flex', gap: '8px' }}>
+            <button
+              onClick={() => setShowNewChatForm(!showNewChatForm)}
+              className="new-chat-button"
+            >
+              + New Chat
+            </button>
+            <button
+              onClick={handleLogout}
+              className="logout-button"
+              style={{
+                background: '#e53e3e',
+                color: 'white',
+                borderRadius: '12px',
+                padding: '10px 16px',
+                fontWeight: 600,
+                border: 'none',
+                cursor: 'pointer',
+              }}
+            >
+              Logout
+            </button>
+          </div>
         </div>
 
         {showNewChatForm && (
